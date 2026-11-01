@@ -28,3 +28,12 @@ model LedgerEntry {
 
   @@map("ledger_entries")
 }
+
+model ProcessedEvent {
+  id          Int      @id @default(autoincrement())
+  eventId     String   @map("event_id")
+  processedAt DateTime @default(now()) @map("processed_at")
+
+  @@index([eventId])
+  @@map("processed_events")
+}
