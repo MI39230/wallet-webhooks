@@ -1,0 +1,19 @@
+meta {
+  name: 04 refund before its payment
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/webhooks/payments
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "evt_003",
+    "type": "refund.succeeded",
+    "data": { "paymentId": "pay_003", "walletId": "wallet_C", "amountCents": 2000 }
+  }
+}

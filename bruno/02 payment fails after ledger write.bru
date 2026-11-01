@@ -1,0 +1,23 @@
+meta {
+  name: 02 payment fails after ledger write
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/webhooks/payments
+  body: json
+  auth: none
+}
+
+headers {
+  x-test-fail-after: ledger
+}
+
+body:json {
+  {
+    "id": "evt_002",
+    "type": "payment.succeeded",
+    "data": { "paymentId": "pay_002", "walletId": "wallet_B", "amountCents": 7500 }
+  }
+}

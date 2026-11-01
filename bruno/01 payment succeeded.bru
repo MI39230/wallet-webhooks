@@ -1,0 +1,19 @@
+meta {
+  name: 01 payment succeeded
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/webhooks/payments
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "evt_001",
+    "type": "payment.succeeded",
+    "data": { "paymentId": "pay_001", "walletId": "wallet_A", "amountCents": 5000 }
+  }
+}

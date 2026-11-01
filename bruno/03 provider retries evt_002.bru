@@ -1,0 +1,19 @@
+meta {
+  name: 03 provider retries evt_002
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/webhooks/payments
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "evt_002",
+    "type": "payment.succeeded",
+    "data": { "paymentId": "pay_002", "walletId": "wallet_B", "amountCents": 7500 }
+  }
+}

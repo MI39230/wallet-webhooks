@@ -1,0 +1,30 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Wallet {
+  id           String        @id
+  ownerLabel   String        @map("owner_label")
+  balanceCents Int           @default(0) @map("balance_cents")
+  entries      LedgerEntry[]
+
+  @@map("wallets")
+}
+
+model LedgerEntry {
+  id          Int      @id @default(autoincrement())
+  walletId    String   @map("wallet_id")
+  eventId     String   @map("event_id")
+  eventType   String   @map("event_type")
+  amountCents Int      @map("amount_cents")
+  createdAt   DateTime @default(now()) @map("created_at")
+  wallet      Wallet   @relation(fields: [walletId], references: [id])
+
+  @@map("ledger_entries")
+}
